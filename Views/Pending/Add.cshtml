@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Add Pending";
+}
+
+<form asp-controller="Pending" asp-action="Add" method="post">
+  <div class="form-group">
+    <label for="input-name">Name</label>
+    <input required type="text" class="form-control" id="input-name" aria-describedby="name-help" placeholder="Name" name="Name">
+    <small class="form-text text-muted">Name of the entity to which the pending transaction is related to</small>
+  </div>
+
+  <div class="form-group">
+    <label for="input-amount">Amount</label>
+    <input required type="number" class="form-control" id="input-amount" placeholder="Amount of the pending transaction" name="Amount">
+    <small class="form-text text-muted">Amount associated with the pending transaction</small>
+  </div>
+
+  <div class="form-group">
+    <label for="input-amount">Deadline</label>
+    <input required type="date" class="form-control" id="input-amount" name="Deadline">
+    <small class="form-text text-muted">Deadline of the pending transaction</small>
+  </div>
+
+  <div class="form-group">
+    <label for="input-type">Type</label>
+    <select class="form-control" id="input-type" name="Type">
+      <option>Credit</option>
+      <option>Debit</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<style>
+    .form-group {
+        margin: 20px 0;
+    }
+</style>

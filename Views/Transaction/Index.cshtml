@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Transactions";
+    ViewBag.Transactions = (ViewData["Transactions"] as IEnumerable<Transaction>)!;
+}
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">₹ @ViewData["Balance"]</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Current balance</h6>
+  </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in ViewBag.Transactions)
+
+        {
+            <tr>
+                <th scope="row">@transaction.Id</th>
+                <td>@transaction.Name</td>
+                <td class='@(transaction.isReceived ? "green-text" : "red-text")' >₹ @transaction.Amount</td>
+                <td>
+                    <a class="btn btn-danger" asp-controller="Transaction" asp-action="Delete" asp-route-id="@transaction.Id">Delete</a>
+                    <a class="btn btn-warning" asp-controller="Transaction" asp-action="Edit" asp-route-id="@transaction.Id">Edit</a>
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-controller="Transaction" asp-action="Add">Add Transaction</a>
+
+<style>
+    .green-text {
+        color: green;
+    }
+    .red-text {
+        color: red;
+    }
+
+    table {
+        margin: 10px 0;
+    }
+
+</style>

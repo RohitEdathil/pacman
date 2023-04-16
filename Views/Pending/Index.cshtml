@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Pendings";
+    ViewBag.Pendings = (ViewData["Pendings"] as IEnumerable<Pending>)!;
+}
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">₹ @ViewData["Balance"]</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Total Pending</h6>
+  </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Deadline</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pending in ViewBag.Pendings)
+
+        {
+            <tr>
+                <th scope="row">@pending.Id</th>
+                <td>@pending.Name</td>
+                <td>@pending.Deadline</td>
+                <td class='@(pending.isReceived ? "green-text" : "red-text")' >₹ @pending.Amount</td>
+                <td>
+                    <a class="btn btn-danger" asp-controller="Pending" asp-action="Delete" asp-route-id="@pending.Id">Delete</a>
+                    <a class="btn btn-warning" asp-controller="Pending" asp-action="Edit" asp-route-id="@pending.Id">Edit</a>
+                    <a class="btn btn-success" asp-controller="Pending" asp-action="Settle" asp-route-id="@pending.Id">Settle</a>
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-controller="Pending" asp-action="Add">Add Pending</a>
+
+<style>
+    .green-text {
+        color: green;
+    }
+    .red-text {
+        color: red;
+    }
+
+    table {
+        margin: 10px 0;
+    }
+
+</style>

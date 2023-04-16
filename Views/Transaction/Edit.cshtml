@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Edit Transaction";
+    ViewBag.Transaction = ViewData["Transaction"];
+}
+
+<form asp-controller="Transaction" asp-action="Update"  method="post">
+  <div class="form-group">
+    <label for="input-name">Name</label>
+    <input required type="text" class="form-control" id="input-name" aria-describedby="name-help" placeholder="Name" name="Name" value="@ViewBag.Transaction.Name">
+    <small class="form-text text-muted">Name of the entity to which the transaction is related to</small>
+  </div>
+
+  <div class="form-group">
+    <label for="input-amount">Amount</label>
+    <input required type="number" class="form-control" id="input-amount" placeholder="Amount of the transaction" name="Amount" value="@ViewBag.Transaction.Amount">
+    <small class="form-text text-muted">Amount associated with the transaction</small>
+  </div>
+
+  <div class="form-group">
+    <label for="input-type">Type</label>
+    <select class="form-control" id="input-type" name="Type">
+      <option selected='@(ViewBag.Transaction.isReceived)' >Credit</option>
+      <option selected='@(!ViewBag.Transaction.isReceived)' >Debit</option>
+    </select>
+  </div>
+
+  <input required type="hidden" value="@ViewBag.Transaction.Id" name="Id">
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<style>
+    .form-group {
+        margin: 20px 0;
+    }
+</style>
